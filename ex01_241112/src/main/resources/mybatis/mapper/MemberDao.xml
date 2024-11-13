@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IMemberDao">
+	<select id="getList" resultType="com.example.demo.dao.MemberDTO">
+		SELECT * FROM member_241112
+	</select>
+	<select id="getMember" resultType="com.example.demo.dao.MemberDTO">
+		SELECT * FROM member_241112 WHERE id = #{id} AND pw = #{pw}
+	</select>
+	<select id="countMember" resultType="Integer">
+		SELECT COUNT(*) FROM member_241112
+	</select>
+	<insert id="insertMember">
+		INSERT INTO member_241112 VALUES(#{id}, #{pw}, #{name})
+	</insert>
+	<delete id="deleteMember">
+		DELETE FROM member_241112 WHERE id = #{id}
+	</delete>
+	<update id="updateMember">
+		UPDATE member_241112 SET id = #{member.id}, pw = #{member.pw}, name = #{member.name} WHERE id = #{id}
+	</update>
+</mapper>
