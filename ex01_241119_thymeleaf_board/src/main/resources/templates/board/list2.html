@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    .select{
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <h1>List2 Page</h1>
+    <hr>
+    <h1 th:text="${page.currentPageNum}"></h1>
+    <form th:action="@{/board/list2/{pageNum}(pageNum=${page.currentPageNum})}" method="get">
+        <label for="size">페이지당 게시글 수:</label>
+        <select name="size" id="size">
+        <!-- <select name="size" id="size" onchange="this.form.submit()"> -->
+            <option value="5" ${size == 5 ? 'selected' : ''}>5</option>
+            <option value="10" ${size == 10 ? 'selected' : ''}>10</option>
+            <option value="15" ${size == 15 ? 'selected' : ''}>15</option>
+        </select>
+        <input type="hidden" name="page" value="${page.currentPage}" />
+        <input type="submit" value="페이지 설정">
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>bno</th>
+                <th>title</th>
+                <th>writer</th>
+                <th>filename</th>
+                <th>regdate</th>
+                <th>modifydate</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="list, state : ${list}" th:with="countNum=${page.countNum}">
+                <tr>
+                    <td>[[${countNum}]]</td>
+                    <td><a th:href="@{/board/detail/{bno}(bno=${list.bno})}">[[${list.title}]]</a></td>
+                    <td>[[${list.writer}]]</td>
+                    <td><img th:src="@{/images/{filename}(filename=${list.filename})}" width="100px"></td>
+                    <td>[[${list.regdate}]]</td>
+                    <td>[[${list.modifydate}]]</td>
+                </tr>
+            </th:block>
+            <tr>
+                <td colspan="6">
+                <th:block th:if="${page.currentPageNum > 1}">
+                    <a th:href="@{/board/list2/1?size={size}(size=${size})}">[<<]</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{/board/list2/{pageNum}?size={size}(pageNum=${page.currentPageNum - 1 }, size=${size})}">[이전]</a>
+                    &nbsp;&nbsp;&nbsp;
+                </th:block>
+                <th:block th:each="num : ${#numbers.sequence(1, page.endPageNum)}">
+                    <a 
+                    th:href="@{/board/list2/{pageNum}?size={size}(pageNum=${num}, size=${size})}" 
+                    th:text="${num}"
+                    th:class="${num == page.currentPageNum ? 'select' : ''}"></a>
+                </th:block>
+                <th:block th:if="${page.currentPageNum < page.endPageNum}">
+                    <a th:href="@{/board/list2/{pageNum}?size={size}(pageNum=${page.currentPageNum + 1 }, size=${size})}">[다음]</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{/board/list2/{pageNum}?size={size}(pageNum=${page.endPageNum}, size=${size})}">[>>]</a>
+                </th:block>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

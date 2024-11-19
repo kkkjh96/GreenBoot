@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>Regist Form Page</h1>
+    <hr>
+    <div>
+        <form th:action="@{/board/regist}" th:object="${board}" method="post" enctype="multipart/form-data">
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>제목 :</th>
+                        <td><input type="text" th:field="*{title}"></td>
+                    </tr>
+                    <tr>
+                        <th>내용 :</th>
+                        <td><textarea th:field="*{content}" cols="50" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>작성자 :</th>
+                        <td><input type="text" th:field="*{writer}"></td>
+                    </tr>
+                    <tr>
+                        <th>file :</th>
+                        <td><input type="file" th:field="*{file}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="등록">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

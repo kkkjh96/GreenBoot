@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ex01_241119.dao.IBoardDao">
+	<insert id="insertBoard">
+		INSERT INTO board_241118 (title, content, writer, filename, regdate) 
+		VALUES (#{board.title}, #{board.content}, #{board.writer}, #{board.filename}, NOW())
+	</insert>
+	<select id="findAll" resultType="com.ex01_241119.dto.BoardDto">
+		SELECT * FROM board_241118 ORDER BY bno DESC
+	</select>
+	<select id="findByBno" resultType="com.ex01_241119.dto.BoardDto">
+		SELECT * FROM board_241118 WHERE bno = #{bno}
+	</select>
+	<select id="findAllWithPaging" resultType="com.ex01_241119.dto.BoardDto">
+		SELECT * FROM board_241118 ORDER BY bno DESC LIMIT #{startNum}, #{limit};
+	</select>
+	<select id="count" resultType="_int">
+		SELECT COUNT(*) FROM board_241118
+	</select>
+	<update id="updateBoard">
+		UPDATE board_241118
+		<set>
+			<if test="board.title != ''">
+				title = #{board.title},
+			</if>
+			<if test="board.content != ''">
+				content = #{board.content},
+			</if>
+			<if test="board.filename != ''">
+				filename = #{board.filename},
+			</if>
+			modifydate = NOW()
+		</set>
+		WHERE bno = #{board.bno}
+	</update>
+	<delete id="deleteBoard">
+		DELETE FROM board_241118 WHERE bno = #{bno}
+	</delete>
+</mapper>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <th:block th:replace="~{/layout/layout1 :: setContent(~{this :: content})}">
+        <th:block th:fragment= "content">
+            <h1>exTemplate page</h1>
+        </th:block>
+    </th:block>
+</body>
+</html>

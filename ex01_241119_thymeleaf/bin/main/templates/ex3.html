@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style th:inline="css">
+    .higlight{
+        color: [[${result}]];
+    }
+</style>
+</head>
+<body>
+    <h1 th:inline="text" class="higlight">Ex3 page - [[${result}]]</h1>
+    <hr>
+    <h2 th:text="${dto}"></h2>
+
+    <div id="demo">----</div>
+    <th:block th:each="cnt : ${#numbers.sequence(1, endNum)}">
+        <p th:text="${cnt}"></p>
+    </th:block>
+    <script th:inline="javascript">
+        const demo = document.getElementById("demo");
+        const dto = JSON.parse('[[${dto}]]');
+        demo.innerHTML = '[[${dto}]]';
+    </script>
+</body>
+</html>

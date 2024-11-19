@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <th:block th:replace="~{/fragments/fragment3 :: target(~{this:: #ulSecond}, ~{this:: #ulFirst})}">
+        <ul id="ulFirst">
+            <li>AAA</li>
+            <li>BBB</li>
+            <li>CCC</li>
+        </ul>
+        <ul id="ulSecond">
+            <li>DDD</li>
+            <li>EEE</li>
+            <li>FFF</li>
+        </ul>
+    </th:block>
+</body>
+</html>
