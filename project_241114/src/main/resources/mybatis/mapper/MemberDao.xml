@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.IMemberDao">
+	<insert id="insertMember">
+		INSERT INTO member_241114 (id, pw, name, addr) VALUES (#{id}, #{pw}, #{name}, #{addr})
+	</insert>
+	<select id="getListMember" resultType="com.project.dto.MemberDTO">
+		SELECT * FROM member_241114
+	</select>
+	<select id="getMember" resultType="com.project.dto.MemberDTO">
+		SELECT * FROM member_241114 WHERE id = #{id}
+	</select>
+	<update id="updateMember">
+		UPDATE member_241114 SET pw = #{pw}, name = #{name}, addr = #{addr} WHERE id = #{id}
+	</update>
+</mapper>

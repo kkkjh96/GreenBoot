@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dao.ICommentDao">
+	<insert id="insertComment">
+		INSERT INTO Comment_241114 (bno, content, writer) VALUES (#{bno}, #{content}, #{writer})
+	</insert>
+	<select id="getListComment" resultType="com.project.dto.CommentDTO">
+		SELECT * FROM Comment_241114 WHERE bno = #{bno} ORDER BY cno DESC
+	</select>
+	<update id="updateComment">
+		UPDATE Comment_241114 SET content = #{content} WHERE cno = #{cno}
+	</update>
+	<delete id="deleteComment">
+		DELETE FROM Comment_241114 WHERE cno = #{cno}
+	</delete>
+</mapper>
