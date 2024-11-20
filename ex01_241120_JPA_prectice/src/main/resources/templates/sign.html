@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>Sign</h1>
+    <div th:include="common/header.html"></div>
+    <hr>
+    <div>
+        <form th:action="@{/login}" th:object="${user}" method="post">
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>ID : </th>
+                        <td>
+                            <input type="text" th:field="*{id}">
+                        </td>
+                        <td rowspan="2">
+                            <input type="submit" value="로그인">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>pw : </th>
+                        <td><input type="text" th:field="*{pw}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <a th:href="@{/signUp}">회원가입</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

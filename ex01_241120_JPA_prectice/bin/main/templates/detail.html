@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>Detail Page</h1>
+    <div th:include="common/header.html"></div>
+    <hr>
+    <div>
+        <form th:action="@{/board/modify}" th:object="${memo}" method="post">
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <th>게시글 번호 :</th>
+                        <td>
+                            <input type="text" th:field="*{mno}" readonly>
+                            <input type="hidden" th:field="*{writer}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>내용 :</th>
+                        <td><textarea th:field="*{memoText}" cols="50" rows="10">[[${memo.memoText}]]</textarea></td>
+                    </tr>
+                    <th:block th:if="${session.id == memo.writer}">
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" value="수정">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a th:href="@{/board/delete/{mno}(mno=${memo.mno})}">삭제</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <a th:href="@{/board/list}">목록보기</a>
+</body>
+</html>
