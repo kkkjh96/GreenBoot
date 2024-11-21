@@ -12,5 +12,7 @@ public interface IMemoService {
 	public MemoDto getMemo(int i);
 	public void updateMemo(MemoDto memo);
 	public void deleteMemo(int i);
-	
+	public List<Memo> getPageList(int page, int pageSize);
+	public int totalCount();
+	public int totalPageSize(int pageSize);
 }

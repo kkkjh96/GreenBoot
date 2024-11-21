@@ -36,10 +36,11 @@ public class UserService implements IUserService {
 		User u = new User();
 		
 		Optional<User> result =  userRepository.findByIdAndPw(id, pw);
+		System.out.println(result);
 		if(result.isPresent()) {
 			u = result.get();
 		}
-		
+		System.out.println(u + "user");
 		UserDto user = UserDto.builder()
 				.id(u.getId())
 				.pw(u.getPw())

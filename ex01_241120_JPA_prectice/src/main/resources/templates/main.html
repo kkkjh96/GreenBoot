@@ -12,12 +12,12 @@
         <p><a th:href="@{/signUp}">회원가입</a></p>
         <p><a th:href="@{/sign}">로그인</a></p>
         <p><a th:href="@{/board/registForm}">글쓰기</a></p>
-        <p><a th:href="@{/board/list}">목록보기</a></p>
+        <p><a th:href="@{/board/list/1}">목록보기</a></p>
     </th:block>
     <th:block th:if= "${session.id != null}">
         <p><a th:href="@{/logout}">로그아웃</a></p>
         <p><a th:href="@{/board/registForm}">글쓰기</a></p>
-        <p><a th:href="@{/board/list}">목록보기</a></p>
+        <p><a th:href="@{/board/list/1}">목록보기</a></p>
         <p><a th:href="@{/mypage/{id}(id=${session.id})}">내가 쓴 글</a></p>
     </th:block>
 </body>

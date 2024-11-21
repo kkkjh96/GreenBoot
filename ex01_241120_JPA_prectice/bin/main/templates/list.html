@@ -3,29 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+    .select{
+        font-weight: bold;
+    }
+</style>
 </head>
 <body>
     <h1>List Page</h1>
     <div th:include="common/header.html"></div>
     <hr>
+    <p>총 게시글 수는 <span th:text="${totalCount}"></span>개 입니다.</p>
+    <form th:action="@{/board/list/{page}(page=${currentPage})}" method="get">
+        <label for="size">페이지당 게시글 수:</label>
+        <select name="size" id="size">
+        <!-- <select name="size" id="size" onchange="this.form.submit()"> -->
+            <option value="5" th:selected="${pageSize == 5}">5</option>
+            <option value="10" th:selected="${pageSize == 10}">10</option>
+            <option value="15" th:selected="${pageSize == 15}">15</option>
+        </select>
+        <input type="hidden" name="page" value="${currentPage}" />
+        <input type="submit" value="페이지 설정">
+    </form>
     <table border="1">
         <thead>
             <tr>
-                <th>mno</th>
-                <th>memoText</th>
-                <th>writer</th>
+                <th>번호</th>
+                <th>내용</th>
+                <th>작성자</th>
             </tr>
         </thead>
         <tbody>
-            <th:block th:each="list, state : ${list}">
+            <th:block th:each="list, state : ${list}" th:with="cnt=${cnt}">
                 <tr>
-                    <td>[[${list.mno}]]</td>
+                    <td>[[${cnt -state.index}]]</td>
                     <td>
-                        <a th:href="@{/board/detail/{mno}(mno = ${list.mno})}">[[${list.memoText}]]</a>
+                        <a th:href="@{/board/detail/{mno}?size={size}(mno = ${list.mno}, size=${pageSize})}">[[${list.memoText}]]</a>
                     </td>
                     <td>[[${list.writer}]]</td>
                 </tr>
             </th:block>
+            <tr>
+                <td colspan="3">
+                    <th:block th:if= "${currentPage > 1}">
+                        <a th:href="@{/board/list/1?size={size}(size=${pageSize})}"><<</a>
+                        &nbsp;
+                        <a th:href="@{/board/list/{page}?size={size}(page=${currentPage - 1}, size=${pageSize})}">이전</a>
+                    </th:block>
+                    <th:block th:if="${totalPage < 6}">
+                        <th:block th:each="num : ${#numbers.sequence(1, totalPage)}">
+                            <a 
+                                th:href="@{/board/list/{page}?size={pageSize}(page=${num}, pageSize=${pageSize})}" 
+                                th:text="${num}"
+                                th:class="${num == currentPage ? 'select' : ''}"></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${totalPage >= 6}">
+                        <th:block th:each="num : ${pageArr}">
+                            <a 
+                                th:href="@{/board/list/{page}?size={pageSize}(page=${num}, pageSize=${pageSize})}" 
+                                th:text="${num}"
+                                th:class="${num == currentPage ? 'select' : ''}"></a>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if= "${currentPage < totalPage}">
+                        <a th:href= "@{/board/list/{page}?size={size}(page=${currentPage + 1}, size=${pageSize})}">다음</a>
+                        &nbsp;
+                        <a th:href= "@{/board/list/{page}?size={size}(page=${totalPage}, size=${pageSize})}">>></a>
+                    </th:block>
+                </td>
+            </tr>
         </tbody>
     </table>
     <p><a th:href="@{/}">메인으로 가기</a></p>

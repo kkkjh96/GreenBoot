@@ -10,7 +10,7 @@
     <hr>
     <h2>글 등록 하기</h2>
     <form th:action="@{/board/regist}" th:object="${memo}" method="post">
-        <p>메모 : <input type="text" th:field="*{memoText}"></p>
+        <p>메모 : <textarea th:field="*{memoText}"></textarea></p>
         <input type="hidden" th:value="${session.id}" name="writer">
         <p><input type="submit" value="저장"></p>
     </form>

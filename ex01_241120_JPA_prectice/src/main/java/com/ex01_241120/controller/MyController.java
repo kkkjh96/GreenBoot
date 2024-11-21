@@ -62,7 +62,8 @@ public class MyController {
 		String id = user.getId();
 		String pw = user.getPw();
 		UserDto u = uservice.getUser(id, pw);
-		if(u != null) {
+		System.out.println(u + "login");
+		if(u.getId() != null && u.getPw() != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			return "redirect:/";
@@ -79,8 +80,11 @@ public class MyController {
 	}
 	
 	@GetMapping("/mypage/{id}")
-	public String mypage(@PathVariable("id") String id, Model model) {
+	public String mypage(@PathVariable("id") String id, 
+			Model model) {
 		List<Memo> list = uservice.getUserList(id);
+		int totalCount = list.size();
+		int totalPage = Math.ceilDiv(totalCount, 5);
 		model.addAttribute("list", list);
 		return "mypage";
 	}

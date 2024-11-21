@@ -19,7 +19,7 @@
         <tbody>
             <th:block th:each="list, state : ${list}">
                 <tr>
-                    <td>[[${list.mno}]]</td>
+                    <td>[[${state.count}]]</td>
                     <td>
                         <a th:href="@{/board/detail/{mno}(mno = ${list.mno})}">[[${list.memoText}]]</a>
                     </td>
