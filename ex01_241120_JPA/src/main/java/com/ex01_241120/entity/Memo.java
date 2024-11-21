@@ -27,5 +27,7 @@ public class Memo {
 	private Long mno;
 	@Column(length = 200, nullable = false)
 	private String memoText;
+	@Column(length = 200)
+	private String writer;
 	
 }
