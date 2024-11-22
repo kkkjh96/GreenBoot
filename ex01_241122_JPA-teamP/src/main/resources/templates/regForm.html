@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>RerForm</h1>
+    <hr>
+    <form th:action="@{/regist}" th:object="${list}" method="post">
+        <table>
+            <tbody>
+                <th:block th:each="member, iterStat  : ${list}" th:if="${iterStat.index < 3}">
+                    <tr>
+                        <td colspan="2">[[${iterStat .index + 1}]]번 팀원</td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td><input type="text" th:field="*{[__${iterStat.index}__].name}"></td>
+                    </tr>
+                    <tr>
+                        <td>나이</td>
+                        <td><input type="text" th:field="*{[__${iterStat.index}__].age}"></td>
+                    </tr>
+                </th:block>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="등록">
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
