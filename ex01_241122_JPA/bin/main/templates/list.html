@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1>List page</h1>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>상품 번호</th>
+                <th>상품 명</th>
+                <th>상품 가격</th>
+                <th>상품 상세 정보</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="product : ${list}">
+                <tr>
+                    <td>[[${product.pno}]]</td>
+                    <td>
+                        <a th:href="@{/detailForm/{id}(id=${product.pno})}">[[${product.pname}]]</a>
+                    </td>
+                    <td>[[${product.price}]]</td>
+                    <td>[[${product.productDetail.description}]]</td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>
